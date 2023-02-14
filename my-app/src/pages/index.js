@@ -56,7 +56,7 @@ export default function Home() {
       const signer = await getProviderOrSigner(true);
       // Create a new instance of the Contract with a Signer, which allows
       // update methods
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, signer);
       // call the mint from the contract to mint the Crypto Dev
       const tx = await nftContract.mint({
         // value signifies the cost of one crypto dev which is "0.01" eth.
@@ -96,7 +96,7 @@ export default function Home() {
       const signer = await getProviderOrSigner(true);
       // Create a new instance of the Contract with a Signer, which allows
       // update methods
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, signer);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, signer);
       // call the startPresale from the contract
       const tx = await nftContract.startPresale();
       setLoading(true);
@@ -121,7 +121,7 @@ export default function Home() {
       const provider = await getProviderOrSigner();
       // We connect to the Contract using a Provider, so we will only
       // have read-only access to the Contract
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, provider);
       // call the presaleStarted from the contract
       const _presaleStarted = await nftContract.presaleStarted();
       if (!_presaleStarted) {
@@ -146,7 +146,7 @@ export default function Home() {
       const provider = await getProviderOrSigner();
       // We connect to the Contract using a Provider, so we will only
       // have read-only access to the Contract
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, provider);
       // call the presaleEnded from the contract
       const _presaleEnded = await nftContract.presaleEnded();
       // _presaleEnded is a Big Number, so we are using the lt(less than function) instead of `<`
@@ -176,7 +176,7 @@ export default function Home() {
       const provider = await getProviderOrSigner();
       // We connect to the Contract using a Provider, so we will only
       // have read-only access to the Contract
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, provider);
       // call the owner function from the contract
       const _owner = await nftContract.owner();
       // We will get the signer now to extract the address of the currently connected MetaMask account
@@ -201,7 +201,7 @@ export default function Home() {
       const provider = await getProviderOrSigner();
       // We connect to the Contract using a Provider, so we will only
       // have read-only access to the Contract
-      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, abi, provider);
+      const nftContract = new Contract(NFT_CONTRACT_ADDRESS, ABI, provider);
       // call the tokenIds from the contract
       const _tokenIds = await nftContract.tokenIds();
       //_tokenIds is a `Big Number`. We need to convert the Big Number to a string
@@ -229,11 +229,11 @@ export default function Home() {
     const provider = await web3ModalRef.current.connect();
     const web3Provider = new providers.Web3Provider(provider);
 
-    // If user is not connected to the Goerli network, let them know and throw an error
+    // If user is not connected to the Mantle Testnet network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 5) {
-      window.alert("Change the network to Goerli");
-      throw new Error("Change network to Goerli");
+    if (chainId !== 5001) {
+      window.alert("Change the network to Mantle Testnet");
+      throw new Error("Change network to Mantle Testnet");
     }
 
     if (needSigner) {
@@ -252,7 +252,7 @@ export default function Home() {
       // Assign the Web3Modal class to the reference object by setting it's `current` value
       // The `current` value is persisted throughout as long as this page is open
       web3ModalRef.current = new Web3Modal({
-        network: "goerli",
+        network: "mantle-testnet",
         providerOptions: {},
         disableInjectedProvider: false,
       });
@@ -325,8 +325,8 @@ export default function Home() {
       return (
         <div>
           <div className={styles.description}>
-            Presale has started!!! If your address is whitelisted, Mint a Crypto
-            Dev 🥳
+            Presale has started!!! If your address is whitelisted, Mint a NFT
+            Zone🥳
           </div>
           <button className={styles.button} onClick={presaleMint}>
             Presale Mint 🚀
@@ -348,7 +348,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Crypto Devs</title>
+        <title>NFT Zone</title>
         <meta name="description" content="Whitelist-Dapp" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -368,9 +368,7 @@ export default function Home() {
         </div>
       </div>
 
-      <footer className={styles.footer}>
-        Made with &#10084; by Noobsters
-      </footer>
+      <footer className={styles.footer}>Made with &#10084; by Noobsters</footer>
     </div>
   );
 }
