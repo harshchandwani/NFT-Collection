@@ -41,7 +41,7 @@ export default function Home() {
       // wait for the transaction to get mined
       await tx.wait();
       setLoading(false);
-      window.alert("You successfully minted a Crypto Dev!");
+      window.alert("You successfully minted a NFT Zone NFT!");
     } catch (err) {
       console.error(err);
     }
